@@ -1,0 +1,39 @@
+Comandos para ayudar a implementar AD en windows Server
+
+ Para programar apagado o reinicio automático
+
+- Comando shutdown.
+    /s      Apaga el equipo.
+    /r      Apaga y reinicia el equipo.
+    /f      Fuerza el cierre de las aplicaciones sin advertir previamente a los usuarios.
+    /t xxx  Establece el período de tiempo de espera antes del cierre en xxx segundos.
+    /c "xxx" Muestra el comentario especificado: xxx
+
+    Podemos obtener la referencia con shutdown /?
+
+- Programador de tareas (taskschd.msc).
+    Ejemplo:
+
+    schtasks /create /ru system /rl highest /sc DAILY /tn Reinicio /tr "shutdown /r /f /t 0 /c "Reinicio"" /st 22:30 /F
+
+    Explicación de los parámetros:
+
+    /create : Crea la tarea programada.
+
+    /ru system: Ejecutar la tarea como el usuario SYSTEM.
+
+    /rl highest: Ejecutar con los privilegios más altos.
+
+    /sc DAILY: Ejecutar la tarea cada día.
+
+    /tn Reinicio: Nombre de la tarea.
+
+    /tr "shutdown /r /f /t 0 /c "Reinicio"": El comando a ejecutar cada vez es: "shutdown /r /f /t 0 /c "Reinicio"", que reiniciará el equipo cerrando todas las aplicaciones abiertas, sin tiempo de espera.
+
+    /st 22:30: La tarea se ejecutará a las 22:30.
+
+    /F: En caso de que exista la tarea, se sobreescribirá la configuración
+
+    luego ejecutamos taskschd.msc, podemos ver la configuración de la tarea:
+
+
