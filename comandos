@@ -48,3 +48,29 @@ En tu equipo (no en el servidor) abre el archivo HOST (C:\Windows\System32\drive
 
 Y finalmente, en tu equipo ejecuta la consola de Administración de Hyper-V (previamente instalada), haz clic con el botón derecho del mouse sobre 
 “Administrador de Hyper-V” y selecciona “Conectar al Servidor”. Escribe el nombre del equipo o la dirección IP.
+
+Cambiar de Version de WS2019
+Abrir ventana CMD en modo administrador
+Para ver tu version actual:
+
+DISM /online /Get-CurrentEdition
+
+Para ver las versiones disponibles:
+
+DISM /online /Get-TargetEditions
+
+Target Edition : ServerStandard
+Target Edition : ServerDatacenter
+Target Edition : ServerEssentials
+
+Encontrar una GLVK apropiada:
+
+https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys
+
+Para cambiar la version:
+
+DISM /online /Set-Edition:<edition ID> /ProductKey:XXXXX-XXXXX-XXXXX-XXXXX-XXXXX /AcceptEula
+
+Ejemplo:
+
+DISM /online /Set-Edition:ServerDatacenter /ProductKey:WMDGN-G9PQG-XVVXX-R3X43-63DFG /AcceptEula 
