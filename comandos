@@ -22,10 +22,29 @@ Comandos para ayudar a implementar AD en windows Server
     /rl highest: Ejecutar con los privilegios más altos.
     /sc DAILY: Ejecutar la tarea cada día.
     /tn Reinicio: Nombre de la tarea.
-    /tr "shutdown /r /f /t 0 /c "Reinicio"": El comando a ejecutar cada vez es: "shutdown /r /f /t 0 /c "Reinicio"", que reiniciará el equipo cerrando todas las aplicaciones abiertas, sin tiempo de espera.
+    /tr "shutdown /r /f /t 0 /c "Reinicio"": El comando a ejecutar cada vez es: "shutdown /r /f /t 0 /c "Reinicio"", 
+    que reiniciará el equipo cerrando todas las aplicaciones abiertas, sin tiempo de espera.
     /st 22:30: La tarea se ejecutará a las 22:30.
     /F: En caso de que exista la tarea, se sobreescribirá la configuración
 
     luego ejecutamos taskschd.msc, podemos ver la configuración de la tarea:
 
+HYPER-V
 
+Una vez instalado Hyper-V Server en el equipo Servidor, inicia sesión e ingresa a la configuración del sistema escribiendo en la consola: “sconfig”
+Nota: Si la versión en español te da un error indicando que no encuentra el archivo de comandos, haz lo siguiente:
+Anda a la ruta: “C:\Windows\System32\es-ES” (cd C:\Windows\System32\es-ES)
+Una vez ahí copia el archivo sconfig.vbs a la carpeta “C:\Windows\System32\en-US”
+(C:\Windows\System32\es-ES> copy sconfig.vbs C:\Windows\System32\en-US)
+
+Una vez abierta la ventana azul de configuración, selecciona la opción 4 “Configurar Administración Remota” y actívala.
+
+Ahora en tu equipo (no en el servidor), abre una consola CMD como Administrador y ejecuta el comando:
+winrm quickconfig y activa el servicio WinRM. Luego escribe el comando: winrm set winrm/config/client @{TrustedHosts=”NOMBRE DE TU SERVIDOR”}
+
+Nota: ”NOMBRE DE TU SERVIDOR” hace referencia al nombre que le diste al equipo en la configuración del Servidor Hyper-V.
+
+En tu equipo (no en el servidor) abre el archivo HOST (C:\Windows\System32\drivers\etc) y agrega la IP y el nombre del Servidor Hyper-V
+
+Y finalmente, en tu equipo ejecuta la consola de Administración de Hyper-V (previamente instalada), haz clic con el botón derecho del mouse sobre 
+“Administrador de Hyper-V” y selecciona “Conectar al Servidor”. Escribe el nombre del equipo o la dirección IP.
