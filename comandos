@@ -74,3 +74,25 @@ DISM /online /Set-Edition:<edition ID> /ProductKey:XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
 Ejemplo:
 
 DISM /online /Set-Edition:ServerDatacenter /ProductKey:WMDGN-G9PQG-XVVXX-R3X43-63DFG /AcceptEula 
+
+
+
+
+Cambiar perfil de red (Público, Privado, Dominio) en PowerShell
+
+Para esto accederemos a una consola de Windows PowerShell como administradores y ejecutaremos el siguiente cmdlet para ver los adaptadores de red disponibles:
+Get-NetAdapter
+
+Para ver en detalle los perfiles actuales del adaptador ejecutaremos el siguiente cmdlet:
+Get-NetConnectionProfile
+
+En este caso podemos ver que el perfil es Privado. Para cambiar el perfil de red usaremos el parámetro Set-NetConnectionProfile indicando el nombre de la interfaz de red de la siguiente manera:
+set-NetConnectionProfile -InterfaceAlias Ethernet -NetworkCategory (Perfil)
+
+Si deseamos usar un perfil público ejecutaremos lo siguiente
+set-NetConnectionProfile -InterfaceAlias Ethernet -NetworkCategory Public
+
+
+
+
+
